@@ -1,0 +1,9 @@
+Artist: The Kinks            | Stage: Main Stage      | Time: 18:00
+Artist: Fleetwood Mac        | Stage: Main Stage      | Time: 20:00
+Artist: Neil Young           | Stage: Main Stage      | Time: 22:00
+Artist: The Grateful Dead    | Stage: The Kashmir Stage | Time: 18:00
+Artist: Pink Floyd           | Stage: The Kashmir Stage | Time: 20:00
+Artist: Led Zeppelin         | Stage: The Kashmir Stage | Time: 22:00
+Artist: Nick Cave            | Stage: Acoustic Stage  | Time: 18:00
+Artist: Joni Mitchell        | Stage: Acoustic Stage  | Time: 20:00
+Artist: Bob Dylan            | Stage: Acoustic Stage  | Time: 22:00
