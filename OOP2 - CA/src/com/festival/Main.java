@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,11 @@ public class Main {
             performances.forEach(System.out::println);
         });
 
+        //Map that links each artist to its Performance object
+        Map<String, Performance> artistPerformanceMap = schedule.getAllPerformances()
+                .stream()
+                .collect(Collectors.toMap(Performance::artistName, Function.identity()));
+
         // Tickets
         Ticket regularTicket = new RegularTicket(101, "Alice", "A1");
         Ticket vipTicket = new VIPTicket(102, "Bob", "Platinum Lounge");
@@ -48,11 +55,28 @@ public class Main {
         System.out.println("\nVendor Information:");
         vendors.forEach(Vendor::displayDetails);
 
+        //Partitioning vendors into distinct groups ie. food vendors vs non-food vendors
+        Map<Boolean, List<Vendor>> foodVendorPartition = vendors.stream()
+                .collect(Collectors.partitioningBy(v -> v.type == Vendor.VendorType.FOOD));
+
         // Sorted performances
         System.out.println("\nSorted Performances by Time:");
         schedule.getAllPerformances().stream()
                 .sorted(Comparator.comparing(Performance::timeSlot))
                 .forEach(System.out::println);
+
+        // Predicate lambda to filter Main Stage performances
+        System.out.println("\nSorted Performances by Stage: Main Stage");
+        Predicate<Performance> isMainStage = p -> p.stage().equals("Main Stage");
+
+        // Use the Predicate to filter performances
+        List<Performance> mainStagePerformances = schedule.getAllPerformances()
+                .stream()
+                .filter(isMainStage)
+                .collect(Collectors.toList());
+
+        // Print filtered performances
+        mainStagePerformances.forEach(System.out::println);
 
         // Concurrency
         System.out.println("\nProcessing concurrent ticket validation:");
